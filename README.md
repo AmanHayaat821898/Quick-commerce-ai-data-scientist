@@ -1,27 +1,27 @@
-# InstaAnalytics: Production-Grade AI Data Scientist for Quick-Commerce ⚡
+# InstaAnalytics: Production-Grade Power BI & SQL Data Science for Quick-Commerce ⚡
 
 InstaAnalytics is a production-ready, high-performance analytical pipeline and interactive control center designed for Quick-Commerce platforms (such as Blinkit, Swiggy Instamart, and Zepto). 
 
-This project showcases end-to-end database design, data simulation at scale (1M+ orders, 5M+ line items), advanced SQL optimization, and a Streamlit executive dashboard.
+This project showcases end-to-end database design, data simulation at scale (1M+ orders, 5M+ line items), advanced SQL optimization, and interactive dashboarding using **Power BI** (and local Streamlit fallback).
 
-![InstaAnalytics Dashboard Mockup](dashboard_screenshot.png)
+![InstaAnalytics Power BI Dashboard Mockup](powerbi_screenshot.png)
 
 ---
 
 ## 🏗️ Project Architecture
 
 ```
-User (Executive / Analyst) ──> Streamlit Control Center (dashboard/)
+User (Executive / Analyst) ──> Power BI Dashboard (real-time visual layer)
                                       │
                                       ▼
-                        Data Connector (db.py) ──> PostgreSQL (Production Replica)
-                                                   └─> SQLite (Local Cache Fallback)
+                        DirectQuery Connection (.pbids) ──> PostgreSQL (Production Replica)
+                                                            └─> SQLite (Local Cache Fallback)
 ```
 
 1. **Transaction Simulation**: High-speed, vectorized synthetic data generator modeling real-world user cohorts, repeat buyers (Zipf's law), temporal seasonality (weekends, hours), and regional holiday events.
 2. **Database DDL**: PostgreSQL schema with range partitioning on transaction timestamps and query-tuned indexes.
 3. **Advanced SQL Portfolio**: 100 complex SQL queries answering core analytical questions (Cohort retention, RFM models, CLV, inventory DIO, and logistics SLA compliance).
-4. **Analytics Interface**: Multipage Streamlit application connecting directly to the database displaying metrics across Revenue, Customers, and Inventory views.
+4. **Power BI Dashboard Integration**: Detailed connection mappings using direct data source files (.pbids) and custom DAX (Data Analysis Expressions) measures.
 
 ---
 
@@ -30,17 +30,16 @@ User (Executive / Analyst) ──> Streamlit Control Center (dashboard/)
 ```text
 CoinMainProj/
 ├── dashboard/
-│   ├── app.py                  # Streamlit Main App & Sidebar Navigation
+│   ├── app.py                  # Streamlit Dashboard (Local Python Fallback)
 │   ├── db.py                   # Dynamic PG/SQLite DB Connector
-│   ├── requirements.txt        # Streamlit App Dependencies
-│   └── views/
-│       ├── revenue.py          # Sales Velocity, GMV, and Store KPIs
-│       ├── customers.py        # Cohort Curves, Customer Tiers, LTV
-│       └── inventory.py        # Out-of-Stock Rates and Replenishments
+│   └── views/                  # Streamlit Views Folder
+├── quick_commerce_connection.pbids # Power BI Data Source Connection File
+├── powerbi_guide.md            # Step-by-step Power BI Integration & DAX Guide
+├── powerbi_screenshot.png      # Power BI Dashboard Visual Interface Preview
 ├── schema.sql                  # PostgreSQL Database DDL
 ├── advanced_analytics_queries.sql # Portfolio of 100 Advanced Analytics Queries
 ├── generate_data_sql_adv.py    # Vectorized 1M-Order Simulator
-└── dashboard_screenshot.png    # Dashboard Interface Preview
+└── README.md                   # Project Overview
 ```
 
 ---
@@ -54,28 +53,15 @@ CoinMainProj/
 
 ---
 
-## 🛠️ Local Quickstart
+## 📊 Power BI Setup & Local Quickstart
 
-### 1. Clone & Set Up Directory
-```bash
-git clone <your-repository-url>
-cd CoinMainProj
-```
+### 1. Launch Power BI
+Double-click [quick_commerce_connection.pbids](quick_commerce_connection.pbids) to configure the data connection. Learn more about the DAX measures used to compute the KPIs in the [Power BI Guide](powerbi_guide.md).
 
-### 2. Install Dependencies
+### 2. Set Up Local SQLite Database
+To recreate the simulated database:
 ```bash
 pip install -r dashboard/requirements.txt
-```
-
-### 3. Generate Simulated Datasets (1M Orders)
-To recreate the database and simulate the logs in a local SQLite file:
-```bash
 python generate_data_sql_adv.py
 python load_and_validate.py
 ```
-
-### 4. Start the Streamlit Dashboard
-```bash
-streamlit run dashboard/app.py
-```
-This starts the dashboard at **`http://localhost:8501`**.

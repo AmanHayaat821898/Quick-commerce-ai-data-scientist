@@ -1,0 +1,18 @@
+{
+  "version": "0.1",
+  "connections": [
+    {
+      "details": {
+        "protocol": "postgresql",
+        "address": {
+          "server": "localhost",
+          "database": "quick_commerce"
+        },
+        "authentication": null,
+        "query": null
+      },
+      "options": {},
+      "mode": "DirectQuery"
+    }
+  ]
+}
