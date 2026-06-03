@@ -1,0 +1,21 @@
+# Ignore massive raw datasets
+*.csv
+*.db
+*.sqlite
+data_export/
+c:/Users/darwi/Downloads/sql_adv/
+
+# Python Virtual Environments & Packages
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# IDE configs
+.vscode/
+.idea/
+.gemini/
+
+# Streamlit configurations
+.streamlit/
