@@ -2,7 +2,7 @@
 
 InstaAnalytics is a production-ready, high-performance analytical pipeline and interactive control center designed for Quick-Commerce platforms (such as Blinkit, Swiggy Instamart, and Zepto). 
 
-This project showcases end-to-end database design, data simulation at scale (1M+ orders, 5M+ line items), advanced SQL optimization, and interactive dashboarding using **Power BI** (and local Streamlit fallback).
+This project showcases end-to-end database design, data simulation at scale (1M+ orders, 5M+ line items), advanced SQL optimization, and interactive dashboarding using **Power BI**.
 
 ![InstaAnalytics Power BI Dashboard Mockup](powerbi_screenshot.png)
 
@@ -29,10 +29,6 @@ User (Executive / Analyst) ──> Power BI Dashboard (real-time visual layer)
 
 ```text
 CoinMainProj/
-├── dashboard/
-│   ├── app.py                  # Streamlit Dashboard (Local Python Fallback)
-│   ├── db.py                   # Dynamic PG/SQLite DB Connector
-│   └── views/                  # Streamlit Views Folder
 ├── quick_commerce_connection.pbids # Power BI Data Source Connection File
 ├── powerbi_guide.md            # Step-by-step Power BI Integration & DAX Guide
 ├── powerbi_screenshot.png      # Power BI Dashboard Visual Interface Preview
@@ -61,7 +57,7 @@ Double-click [quick_commerce_connection.pbids](quick_commerce_connection.pbids) 
 ### 2. Set Up Local SQLite Database
 To recreate the simulated database:
 ```bash
-pip install -r dashboard/requirements.txt
+pip install pandas numpy faker
 python generate_data_sql_adv.py
 python load_and_validate.py
 ```
